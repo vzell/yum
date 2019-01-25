@@ -1,68 +1,32 @@
 ---
 # tasks file for vzell.yum
 
-- name: ensure a list of packages installed
-  yum:
-    name: "{{ packages }}"
-  vars:
-    packages:
-      - mc
-      - bash-completion
-      - xorg-x11-xauth # Preventing: X11 forwarding request failed on channel 0
-      - xterm
-      - xorg-x11-fonts-misc
-      - wget
-      - unzip
-      - telnet
-      - nmap
-      - tcpdump
-      - net-tools
-      - bind-utils
-      - traceroute
-      - strace
-      - ltrace
-      - lsof
-      - emacs
-      - emacs-common
-      - iptraf
-      - dstat 
-      - mutt
-      - tree
-      - dos2unix
-      - yum-utils
-      - rsync
-      - git
-#      - wireshark-gnome
+- name: include release specific variables
+  include_vars: "{{ loop_var }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths: "../vars"
+      skip: "yes"
+  loop_control:
+    loop_var: "loop_var"
+  tags: yum
 
-- name: ensure a list of packages installed from EPEL
-  yum:
-    name: "{{ packages }}"
-    enablerepo: ol7_developer_EPEL
-  vars:
-    packages:
-      - haveged
-      - multitail
-      - htop
-      - dhcping
-      - bash-completion-extras
-      - bwm-ng
-      - bmon
-      - atop
-      - w3m
-      - iotop
-      - mtr
-      - ncdu
-      - iftop
-      - pv
-      - ngrep
-      - siege
-      - glances
-# This prevents terminator from starting with errors:
-# 
-# glib.GError: Client failed to connect to the D-BUS daemon:
-# /bin/dbus-launch terminated abnormally without any error message
-#
-# <listen>tcp:host=localhost,port=0</listen> in /etc/dbus-1/session.conf
-      - dbus-x11
-      - terminator
-      - notify-python
+- name: include release specific tasks
+  include_tasks: "{{ loop_var }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths: "."
+      skip: "yes"
+  loop_control:
+    loop_var: "loop_var"
+  tags: yum
