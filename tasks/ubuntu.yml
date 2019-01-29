@@ -1,0 +1,7 @@
+- name: ensure a list of packages installed
+  apt:
+    pkg: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - mc
