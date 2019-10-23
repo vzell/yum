@@ -5,3 +5,6 @@
   vars:
     packages:
       - mc
+      - net-tools
+      - xauth
+      - emacs
