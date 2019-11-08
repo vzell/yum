@@ -30,6 +30,15 @@
       - rsync
       - git
 #      - wireshark-gnome
+# This prevents terminator from starting with errors:
+#
+# glib.GError: Client failed to connect to the D-BUS daemon:
+# /bin/dbus-launch terminated abnormally without any error message
+#
+# <listen>tcp:host=localhost,port=0</listen> in /etc/dbus-1/session.conf
+      - dbus-x11
+      - iotop
+      - mtr
 
 - name: ensure a list of packages installed from EPEL
   yum:
@@ -37,28 +46,19 @@
   vars:
     packages:
       - haveged
-      - multitail
+#      - multitail
       - htop
-      - dhcping
-      - bash-completion-extras
-      - bwm-ng
-      - bmon
+#      - dhcping
+#      - bash-completion-extras
+#      - bwm-ng
+#      - bmon
       - atop
-      - w3m
-      - iotop
-      - mtr
+#      - w3m
       - ncdu
       - iftop
       - pv
       - ngrep
-      - siege
-      - glances
-# This prevents terminator from starting with errors:
-# 
-# glib.GError: Client failed to connect to the D-BUS daemon:
-# /bin/dbus-launch terminated abnormally without any error message
-#
-# <listen>tcp:host=localhost,port=0</listen> in /etc/dbus-1/session.conf
-      - dbus-x11
-      - terminator
-      - notify-python
+#      - siege
+#      - glances
+#      - terminator
+#      - notify-python

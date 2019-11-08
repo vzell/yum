@@ -55,7 +55,7 @@
       - siege
       - glances
 # This prevents terminator from starting with errors:
-# 
+#
 # glib.GError: Client failed to connect to the D-BUS daemon:
 # /bin/dbus-launch terminated abnormally without any error message
 #
