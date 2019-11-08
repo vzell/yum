@@ -1,0 +1,64 @@
+- name: ensure a list of packages installed
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - mc
+      - bash-completion
+      - xorg-x11-xauth # Preventing: X11 forwarding request failed on channel 0
+      - xterm
+      - xorg-x11-fonts-misc
+      - wget
+      - unzip
+      - telnet
+      - nmap
+      - tcpdump
+      - net-tools
+      - bind-utils
+      - traceroute
+      - strace
+      - ltrace
+      - lsof
+      - emacs
+      - emacs-common
+      - iptraf
+      - dstat 
+      - mutt
+      - tree
+      - dos2unix
+      - yum-utils
+      - rsync
+      - git
+#      - wireshark-gnome
+
+- name: ensure a list of packages installed from EPEL
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - haveged
+      - multitail
+      - htop
+      - dhcping
+      - bash-completion-extras
+      - bwm-ng
+      - bmon
+      - atop
+      - w3m
+      - iotop
+      - mtr
+      - ncdu
+      - iftop
+      - pv
+      - ngrep
+      - siege
+      - glances
+# This prevents terminator from starting with errors:
+# 
+# glib.GError: Client failed to connect to the D-BUS daemon:
+# /bin/dbus-launch terminated abnormally without any error message
+#
+# <listen>tcp:host=localhost,port=0</listen> in /etc/dbus-1/session.conf
+      - dbus-x11
+      - terminator
+      - notify-python
