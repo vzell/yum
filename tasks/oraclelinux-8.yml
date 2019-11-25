@@ -1,5 +1,5 @@
-- name: ensure a list of packages installed
-  yum:
+- name: Ensure a list of packages installed from OL
+  dnf:
     name: "{{ packages }}"
   vars:
     packages:
@@ -40,8 +40,8 @@
       - iotop
       - mtr
 
-- name: ensure a list of packages installed from EPEL
-  yum:
+- name: Ensure a list of packages installed from EPEL
+  dnf:
     name: "{{ packages }}"
   vars:
     packages:
