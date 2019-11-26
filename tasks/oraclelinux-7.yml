@@ -1,4 +1,4 @@
-- name: ensure a list of packages installed
+- name: Ensure a list of packages installed from OL
   yum:
     name: "{{ packages }}"
   vars:
@@ -31,7 +31,7 @@
       - git
 #      - wireshark-gnome
 
-- name: ensure a list of packages installed from EPEL
+- name: Ensure a list of packages installed from EPEL
   yum:
     name: "{{ packages }}"
     enablerepo: ol7_developer_EPEL
