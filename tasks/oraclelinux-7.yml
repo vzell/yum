@@ -29,6 +29,7 @@
       - yum-utils
       - rsync
       - git
+      - libselinux-python # Preventing: Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!
 #      - wireshark-gnome
 
 - name: Ensure a list of packages installed from EPEL
