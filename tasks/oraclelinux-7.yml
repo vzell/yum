@@ -63,3 +63,4 @@
       - dbus-x11
       - terminator
       - notify-python
+      - python36
